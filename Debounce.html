@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing Example</title>
+</head>
+<body>
+<h1>Type in the input field to see debouncing in action</h1>
+<input type="text" id="search" placeholder="Type something..." />
+<div id="result"></div>
+
+<script>
+    function debounce(fn, delay = 2000) {
+        let timeoutID;
+        console.log("timeoutID", timeoutID)
+        return function(args) {
+            // console.log(...args)
+            const context = this;
+            clearTimeout(timeoutID);
+            timeoutID = setTimeout(() => fn.call(context,args), delay);
+        }
+    }
+
+    function handleInput(event) {
+        // console.log(...event)
+        document.getElementById('result').textContent = 'You typed: ' + event.target.value;
+        console.log('Input processed:', new Date().toLocaleTimeString());
+    }
+
+    const debouncedInput = debounce(handleInput);
+
+    document.getElementById('search').addEventListener('input', debouncedInput);
+</script>
+</body>
+</html>

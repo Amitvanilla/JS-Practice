@@ -11,13 +11,15 @@
 <div id="result"></div>
 
 <script>
-    function debounce(fn, delay = 2000) {
+    function debounce(fn, delay = 2000, cancel = true) {
         let timeoutID;
         console.log("timeoutID", timeoutID)
         return function(args) {
             // console.log(...args)
             const context = this;
-            clearTimeout(timeoutID);
+            if(!cancel){
+                clearTimeout(timeoutID);
+            }
             timeoutID = setTimeout(() => fn.call(context,args), delay);
         }
     }

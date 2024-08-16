@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div>
+        <p>
+            <button>Hello</button>
+        </p>
+    </div>
+    <p>
+        <span>World!</span>
+    </p>
+</div>
+<script>
+    function getDomHeightRecursive(node) {
+        if (!node) return 0;
+
+        let maxChildHeight = 0;
+
+        // Recursively check the height of each child node
+        node.childNodes.forEach(child => {
+            maxChildHeight = Math.max(maxChildHeight, getDomHeightRecursive(child));
+        });
+
+        // Add 1 to account for the current node
+        return maxChildHeight + 1;
+    }
+    console.dir(document.querySelector('div'))
+    let treeHeight = getDomHeightRecursive(document.querySelector('div'));
+    console.log(treeHeight);
+</script>
+</body>
+</html>

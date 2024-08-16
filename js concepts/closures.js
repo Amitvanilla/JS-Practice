@@ -1,26 +1,20 @@
+// Closure Example
 
-// add(1)(2)(3)
-const join = (a, b, c) => {
-    return `${a}_${b}_${c}`
+function outerFunction(outerVariable) {
+    // outerFunction creates a local variable (outerVariable) and returns an inner function
+    return function innerFunction(innerVariable) {
+        // innerFunction is a closure that has access to outerVariable from outerFunction
+        console.log('Outer Variable: ' + outerVariable);
+        console.log('Inner Variable: ' + innerVariable);
+    };
 }
-const curriedJoin = curry(join)
-curriedJoin(1, 2, 3) // '1_2_3'
-// curriedJoin(1)(2, 3) // '1_2_3'
-// curriedJoin(1, 2)(3) // '1_2_3'
 
+// Create a closure by calling outerFunction
+const newFunction = outerFunction('outside');
 
+// Call the closure
+newFunction('inside');
 
-// add(1,2,3)
-function curry(args){
-    console.log(args.length)
-    return function ff(...s){
-        if(s.length <= args.length){
-            console.log(join.apply(this, args))
-        }
-        else{
-            return function (...m){
-                console.log(ff.apply(this, args.concat(m)))
-            }
-        }
-    }
-}
+// Output:
+// Outer Variable: outside
+// Inner Variable: inside

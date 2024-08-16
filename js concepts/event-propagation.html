@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Propagation Example</title>
+    <style>
+        #grandparent {
+            padding: 20px;
+            background-color: lightblue;
+        }
+        #parent {
+            padding: 20px;
+            background-color: lightgreen;
+        }
+        #child {
+            padding: 20px;
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+<div id="grandparent">
+    Grandparent
+    <div id="parent">
+        Parent
+        <div id="child">
+            Child
+        </div>
+    </div>
+</div>
+
+<script>
+    // Capturing Phase Example
+    document.getElementById('grandparent').addEventListener('click', () => {
+        console.log('Grandparent clicked (Capturing Phase)');
+    }, true); // true enables capturing phase
+
+    document.getElementById('parent').addEventListener('click', () => {
+        console.log('Parent clicked (Capturing Phase)');
+    }, true);
+
+    document.getElementById('child').addEventListener('click', () => {
+        console.log('Child clicked (Capturing Phase)');
+    }, true);
+
+    // Bubbling Phase Example
+    document.getElementById('grandparent').addEventListener('click', () => {
+        console.log('Grandparent clicked (Bubbling Phase)');
+    });
+
+    document.getElementById('parent').addEventListener('click', (event) => {
+        console.log('Parent clicked (Bubbling Phase)');
+        // event.stopPropagation(); // Uncomment to stop propagation in bubbling phase
+    });
+
+    document.getElementById('child').addEventListener('click', () => {
+        console.log('Child clicked (Bubbling Phase)');
+    });
+</script>
+</body>
+</html>
